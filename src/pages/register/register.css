@@ -1,0 +1,98 @@
+/* .register {
+} */
+
+.register .center {
+  display: flex;
+  justify-content: center;
+}
+.register .form-register {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 0 1px rgb(23 23 23 / 10%);
+  background-color: #fff;
+  margin: 30px 0;
+  width: 60%;
+  padding: 40px 0;
+  border-radius: 7px;
+}
+
+.register form .btn-signup {
+  color: #fff;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 25px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.register form .apple{
+  background-color: #000;
+}
+.register form .forem{
+  background-color: #0a3e4a;
+}
+.register form .github{
+  background-color: #24292e;
+}
+.register form .twitter{
+  background-color: #1da1f2;
+}
+
+.register .form-register h2 {
+  padding: 0 75px;
+  text-align: center;
+}
+
+.register .ant-form {
+  padding: 20px;
+}
+
+.register .ant-form-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 0 10px 0;
+}
+
+.ant-form-item-label > label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.register .ant-input,
+.register .ant-input-password {
+  width: 400px;
+  padding: 7px 0;
+  text-indent: 5px;
+  border-radius: 5px;
+}
+
+.register .register-form-button {
+  background-color: rgb(59 73 223);
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 25px 0;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.register .register-form-button:hover {
+  background-color: rgb(47 58 178);
+}
+
+.register .register-form-button span {
+  width: 100%;
+  text-align: center;
+}
