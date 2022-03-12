@@ -1,0 +1,60 @@
+.create-post .center {
+  display: flex;
+  justify-content: center;
+}
+.create-post .create-post-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 0 1px rgb(23 23 23 / 10%);
+  background-color: #fff;
+  margin: 30px 0;
+  width: 60%;
+  padding: 40px 0;
+  border-radius: 7px;
+}
+
+.create-post .create-post-form h2{
+    align-self: flex-start;
+    padding: 0 20px;
+}
+
+.create-post .create-post-form .upload-image{
+    align-self: flex-start;
+    padding: 20px;
+}
+
+.create-post .ant-form{
+    width: 80%;
+}
+
+.create-post .ant-form .ant-input{
+    padding: 7px 11px;
+    border-radius: 5px;
+}
+
+.create-post .ant-form textarea{
+    resize: none;
+}
+
+.create-post .ant-form .ant-form-item{
+        display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.create-post .ant-form .ant-form-item .ant-form-item-control{
+    width: 100%;
+}
+
+.create-post .ant-form .publish{
+    padding: 20px 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 5px;
+}

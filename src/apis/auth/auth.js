@@ -22,12 +22,9 @@ export const verifyAccount = async (userId) => {
   const verifyUrl = `https://medium0clone.herokuapp.com/api/user/verify/email`;
   try {
     const verifiedAccount = await axios.post(verifyUrl, userId);
-    console.log(
-      "🚀 ~ file: auth.js ~ line 25 ~ verifyAccount ~ verifiedAccount",
-      verifiedAccount.verificationCode
-    );
+
     return {
-      data: verifiedAccount.verificationCode,
+      data: verifiedAccount,
       status: 'success'
     };
     
@@ -37,5 +34,39 @@ export const verifyAccount = async (userId) => {
       status: "error",
     };
     
+  }
+}
+
+
+export const loginAccount = async (userData) => { 
+  const loginUrl = `https://medium0clone.herokuapp.com/api/user/login`;
+  try {
+    const loginResponse = await axios.post(loginUrl, userData);
+    return {
+      data: loginResponse,
+      status: "success"
+    };
+  } catch (error) {
+    return {
+      data: error.response.data,
+      status: "error"
+    };
+  }
+}
+
+export const sendVerify = async (userData) => { 
+  const sendVerifyUrl = `https://medium0clone.herokuapp.com/api/user/verify/send`;
+  try {
+    const sendVerifyResponse = await axios.post(sendVerifyUrl, userData);
+    return {
+      data: sendVerifyResponse,
+      status: "success"
+    };
+    
+  } catch (error) {
+    return {
+      data: error.response.data,
+      status: "error"
+    }
   }
 }

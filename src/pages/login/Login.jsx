@@ -1,26 +1,40 @@
-import React from 'react'
-import { Form, Input, Button, Checkbox, Typography } from 'antd'
-import {Link} from 'react-router-dom'
-import { useForm, Controller } from 'react-hook-form'
+import React, { useState, useCallback } from "react";
+import { Form, Input, Button, Checkbox, Typography } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerValidationSchema } from "../../utils/validation";
+import { loginValidationSchema } from "../../utils/validation";
+import { loginAccount } from "../../apis/auth";
 import {
   AppleFilled,
   GithubFilled,
   TwitterCircleFilled,
 } from "@ant-design/icons";
-import './login.css'
+import "./login.css";
 
 const Login = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(registerValidationSchema)
+  const [notVerified, setNotVerified] = useState("");
+  const navigate = useNavigate();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginValidationSchema),
   });
-  const{Text} = Typography
+  const { Text } = Typography;
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  const onSubmit = useCallback(async (data) => {
+    const res = await loginAccount(data);
+    if (res.status === "success") {
+      const loginUser = res.data.data;
+      localStorage.setItem("login", JSON.stringify(loginUser));
+      return navigate("/");
+    }
 
+    setNotVerified(res.data.data[0].message);
+  }, []);
 
   return (
     <section className="login">
@@ -53,7 +67,24 @@ const Login = () => {
                 render={({ field }) => <Input type="*email" {...field} />}
               />
             </Form.Item>
-            {errors.email && <Text type="danger">{errors.email.message}</Text>}
+            {errors.email && (
+              <Text type="danger">
+                {errors.email.message}
+                <br />
+              </Text>
+            )}
+            {notVerified && (
+              <Text type="danger">
+                {notVerified}{" "}
+                <span className="click-here"> &nbsp;click here to&nbsp;</span>
+                <Link to="/sendVerify">verify</Link>
+              </Text>
+            )}
+            {/* {
+              <Text>
+                &nbsp;click here to <Link to="/sendVerify">verify</Link>
+              </Text>
+            } */}
 
             <Form.Item label="Password">
               <Controller
@@ -74,7 +105,10 @@ const Login = () => {
                 name="remember"
                 control={control}
                 render={({ field }) => (
-                  <Checkbox {...field}> Remember me </Checkbox>
+                  <Checkbox {...field} checked={false}>
+                    {" "}
+                    Remember me{" "}
+                  </Checkbox>
                 )}
               />
             </Form.Item>
@@ -95,6 +129,6 @@ const Login = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Login
+export default Login;

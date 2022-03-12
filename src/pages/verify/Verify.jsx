@@ -1,19 +1,33 @@
-import React, { useCallback } from "react";
+import React, {useState, useCallback } from "react";
 import { Form, Input, Button } from 'antd'
 import {verifyAccount} from '../../apis/auth'
 import './verify.css'
+import { useNavigate } from "react-router-dom";
 
 
 const Verify = () => {
+  const [verificationCode, setVerificationCode] = useState(Number)
+  let navigate = useNavigate();
+      const userJson = JSON.parse(localStorage.getItem("user"));
+      const userId = userJson.data.data.id;
+      let user = {
+        id: userId,
+        verificationCode: Number(verificationCode),
+      };
 
-    const clickToVerify = useCallback( async () => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        const userId = user.data.id;
-        const response = await verifyAccount(userId)
-        console.log(response.data);
+  const clickToVerify = async () => {
 
+    const res = await verifyAccount(user);
+    if (res.status === "success") {
+      return navigate("/");
+    }
 
-    }, [])
+    return navigate("/verify");
+  };
+    
+  
+  
+    // useCallback(, [verificationCode]);
 
 
 
@@ -21,11 +35,15 @@ const Verify = () => {
   return (
     <section className="verify">
       <div className="container center">
-              <div className="form-verify">
-                  <h3>Please, check your email to enter the code </h3>
+        <div className="form-verify">
+          <h3>Please, check your email to enter the code </h3>
           <Form>
             <Form.Item>
-              <Input placeholder="Type your code..." />
+              <Input
+                placeholder="Type your code..."
+                onChange={(e) => setVerificationCode(e.target.value)}
+                
+              />
             </Form.Item>
 
             <Button type="primary" htmlType="submit" onClick={clickToVerify}>

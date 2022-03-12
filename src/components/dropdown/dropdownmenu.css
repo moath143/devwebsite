@@ -1,0 +1,32 @@
+.ant-dropdown{
+left: 1090px !important;
+    top: 55px !important;
+    width: 180px !important;
+    border-radius: 5px;
+}
+
+
+.ant-dropdown ul{
+
+}
+
+.ant-dropdown-menu-item {
+    padding: 12px;
+}
+
+.ant-dropdown-menu-item a,
+.signout{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.signout{
+    border: none;
+    background-color: #fff;
+}
+
+.signout:hover,
+.ant-dropdown ul li:hover .signout{
+    background-color: transparent;
+}

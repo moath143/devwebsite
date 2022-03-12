@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./register.css";
 import { Form, Input, Button, Tooltip, Typography } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm, Controller  } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerValidationSchema } from "../../utils/validation";
-import {registerAccount} from '../../apis/auth'
+import { registerAccount } from "../../apis/auth";
 import {
   AppleFilled,
   GithubFilled,
@@ -13,7 +13,10 @@ import {
 } from "@ant-design/icons";
 
 const Register = () => {
-  
+  const [emailUsed, setEmailUsed] = useState("");
+  const[loading, setLoading] = useState(false)
+
+
   const { Text } = Typography;
   const {
     control,
@@ -22,27 +25,27 @@ const Register = () => {
   } = useForm({
     resolver: yupResolver(registerValidationSchema),
   });
-  
-  let navigate = useNavigate ();
 
-
+  let navigate = useNavigate();
 
 
 
   const onSubmit = async (data) => {
+    const response = await registerAccount(data);
+    setLoading(true)
     
     
-    const response = await registerAccount(data)
-    if (response.status === 'success') {
+    if (response.status === "success") {
       let user = response.data;
-      console.log("🚀 ~ file: Register.jsx ~ line 38 ~ onSubmit ~ user", user)
-      localStorage.setItem('user', JSON.stringify(user));
-      return navigate('/verify')
+      localStorage.setItem("user", JSON.stringify(user));
+      return navigate("/verify");
     }
     
+    setLoading(false);
+    setEmailUsed(response.data.data[0].message);
+      
+    
   };
-
-
 
   return (
     <section className="register">
@@ -101,7 +104,7 @@ const Register = () => {
             </Tooltip>
             <Tooltip
               placement="bottom"
-              title={errors.email && errors.email.message}
+              title={errors.email && emailUsed && errors.email.message}
             >
               <Form.Item label="Email">
                 <Controller
@@ -112,7 +115,15 @@ const Register = () => {
                 />
               </Form.Item>
               {errors.email && (
-                <Text type="danger">{errors.email.message}</Text>
+                <Text type="danger">
+                  {errors.email.message} <br />{" "}
+                </Text>
+              )}
+              {/* {<br />} */}
+              {emailUsed ? (
+                <Text type="danger">{emailUsed}</Text>
+              ) : (
+                <Text type="danger"></Text>
               )}
             </Tooltip>
             <Tooltip
@@ -139,7 +150,8 @@ const Register = () => {
               className="register-form-button"
               
             >
-              Sign up
+              {loading ? "Loading..." : "Sign up"}
+              {console.log("🚀 ~ file: Register.jsx ~ line 154 ~ Register ~ loading", loading)}
             </Button>
 
             <p>

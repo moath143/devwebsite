@@ -94,3 +94,12 @@
   width: 100%;
   text-align: center;
 }
+
+form p{
+  margin: 10px 0;
+}
+
+
+form .click-here{
+  color: #000;
+}

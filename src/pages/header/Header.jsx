@@ -1,11 +1,27 @@
-import React from 'react'
-import { Row, Col, Input, Button } from 'antd'
-import { Link } from "react-router-dom";
-import Logo from '../../assets/logo.png'
-import './header.css'
+import React, { useState, useEffect } from "react";
+import useAuth from "../../utils/helpers/isAuth";
+import { Row, Col, Input, Button } from "antd";
+
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../assets/logo.png";
+import LoginRegisterBtns from "../../components/loginRegisterBtns";
+import "./header.css";
+import DropdownMenu from "./../../components/dropdown";
 
 const Header = () => {
-  const { Search } = Input
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const { Search } = Input;
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("login"));
+    if (userData) {
+      
+      return setUser(userData.data.user);
+    }
+    navigate("/");
+  }, []);
+
   return (
     <header>
       <div className="container">
@@ -24,21 +40,22 @@ const Header = () => {
           </Col>
           <Col sm={12}>
             <div className="login-register">
-              <Button className="login" type="primary">
-                <Link to="/login">Login</Link>
-              </Button>
-              {/* <Button className="login" type="primary">
-                <Link to="/verify">verify</Link>
-              </Button> */}
-              <Button className="register" type="danger">
-                <Link to="/create-account">Create account</Link>
-              </Button>
+              {useAuth().isAuthenticated ? (
+                <div className="profile">
+                  <Button className="create-post">
+                    <Link to="/create-post">Create post</Link>
+                  </Button>
+                  <DropdownMenu user={user} />
+                </div>
+              ) : (
+                <LoginRegisterBtns />
+              )}
             </div>
           </Col>
         </Row>
       </div>
     </header>
   );
-}
+};
 
-export default Header
+export default Header;

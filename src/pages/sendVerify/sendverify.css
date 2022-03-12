@@ -1,0 +1,28 @@
+.send-verify .center {
+  display: flex;
+  justify-content: center;
+}
+.send-verify .form-verify {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 0 1px rgb(23 23 23 / 10%);
+  background-color: #fff;
+  margin: 30px 0;
+  width: 60%;
+  padding: 40px 0;
+  border-radius: 7px;
+}
+
+.send-verify .form-verify form{
+    display: flex;
+    flex-direction: column;
+}
+
+.send-verify .ant-input {
+  width: 400px;
+  padding: 7px 0;
+  text-indent: 10px;
+  border-radius: 5px;
+}
