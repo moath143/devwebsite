@@ -16,12 +16,12 @@ import TermsIcon from "../../assets/list/terms.svg";
 import PrivacyIcon from "../../assets/list/privacy.svg";
 import CodeLand from "../../assets/codeland.png";
 import Azure from "../../assets/azuer.webp";
+import useAuth from "../../utils/helpers/isAuth";
 
 import "./home.css";
 
 const Home = () => {
-    const { Meta } = Card;
-
+  const { Meta } = Card;
 
   return (
     <sectin className="home">
@@ -38,7 +38,7 @@ const Home = () => {
                 careers.
               </p>
               <div className="login-register flex-col">
-                <LoginRegisterBtns />
+                {useAuth().isAuthenticated ? "" : <LoginRegisterBtns />}
               </div>
             </div>
             <ul>
@@ -99,9 +99,7 @@ const Home = () => {
               </li>
             </ul>
           </Col>
-          <Col className="aside-2" span={13}>
-            
-          </Col>
+          <Col className="aside-2" span={13}></Col>
           <Col className="aside-3" span={6}>
             <Card hoverable cover={<img alt="codeland" src={CodeLand} />}>
               <Meta title="CodeLand 2022: Taking place virtually on June 16 & 17" />
