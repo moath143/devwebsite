@@ -100,7 +100,7 @@ const Home = () => {
             </ul>
           </Col>
           <Col className="aside-2" span={13}>
-            aside 2
+            
           </Col>
           <Col className="aside-3" span={6}>
             <Card hoverable cover={<img alt="codeland" src={CodeLand} />}>

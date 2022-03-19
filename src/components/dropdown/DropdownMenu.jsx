@@ -4,13 +4,10 @@ import {useNavigate, Link} from 'react-router-dom'
 import { UserOutlined } from "@ant-design/icons";
 import './dropdownmenu.css'
 
-const DropdownMenu = ({ user }) => {
-  const navigate = useNavigate()
+const DropdownMenu = () => {
 
-  const signOut = () => {
-    localStorage.removeItem("login");
-    return navigate("/login");
-  };
+
+
 
 
 
@@ -18,9 +15,9 @@ const DropdownMenu = ({ user }) => {
       <Menu>
         <Menu.Item key="0">
           <a href="#">
-            {user.firstName}
+            {/* {user.firstName}
             &nbsp;
-            {user.lastName}
+            {user.lastName} */}
           </a>
         </Menu.Item>
         <Menu.Divider />
@@ -33,7 +30,7 @@ const DropdownMenu = ({ user }) => {
         <Menu.Divider />
         <Menu.Item key="3">
           {" "}
-          <Button className='signout' onClick={signOut}>Sign Out</Button>
+          <Button className='signout'>Sign Out</Button>
         </Menu.Item>
       </Menu>
     );

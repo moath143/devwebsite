@@ -9,18 +9,10 @@ import "./header.css";
 import DropdownMenu from "./../../components/dropdown";
 
 const Header = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+
   const { Search } = Input;
 
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("login"));
-    if (userData) {
-      
-      return setUser(userData.data.user);
-    }
-    navigate("/");
-  }, []);
+
 
   return (
     <header>
@@ -45,7 +37,7 @@ const Header = () => {
                   <Button className="create-post">
                     <Link to="/create-post">Create post</Link>
                   </Button>
-                  <DropdownMenu user={user} />
+                  <DropdownMenu/>
                 </div>
               ) : (
                 <LoginRegisterBtns />

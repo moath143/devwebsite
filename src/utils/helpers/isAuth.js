@@ -11,10 +11,10 @@ const useAuth = () => {
     if (userData) {
       setIsAuthenticated(true);
        setUser(userData);
-      navigate("/");
+      // navigate("/");
       return user;
     } else {
-      navigate("/login");
+      // navigate("/login");
     }
   }, []);
   return { isAuthenticated: isAuthenticated, user: user };
