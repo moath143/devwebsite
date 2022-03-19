@@ -11,7 +11,8 @@ import DropdownMenu from "./../../components/dropdown";
 const Header = () => {
 
   const { Search } = Input;
-
+  const userStorage = localStorage.getItem("login");
+  const user = JSON.parse(userStorage).data.user;
 
 
   return (
@@ -37,7 +38,7 @@ const Header = () => {
                   <Button className="create-post">
                     <Link to="/create-post">Create post</Link>
                   </Button>
-                  <DropdownMenu/>
+                  <DropdownMenu user={user} />
                 </div>
               ) : (
                 <LoginRegisterBtns />
