@@ -17,9 +17,9 @@ const DropdownMenu = ({user}) => {
     <Menu>
       <Menu.Item key="0">
         <a href="#">
-          {user.firstName}
+          {/* {user.firstName}
             &nbsp;
-            {user.lastName}
+            {user.lastName} */}
         </a>
       </Menu.Item>
       <Menu.Divider />

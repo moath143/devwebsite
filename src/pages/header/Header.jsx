@@ -9,10 +9,15 @@ import "./header.css";
 import DropdownMenu from "./../../components/dropdown";
 
 const Header = () => {
+  //  const[user, setUser] = useState({});
 
   const { Search } = Input;
-  const userStorage = localStorage.getItem("login");
-  const user = JSON.parse(userStorage).data.user;
+  // const userStorage = localStorage.getItem("login");
+  // if (userStorage) {
+  //   const user = JSON.parse(userStorage).data.user;
+  //   setUser(user);
+    
+  // }
 
 
   return (
@@ -38,7 +43,7 @@ const Header = () => {
                   <Button className="create-post">
                     <Link to="/create-post">Create post</Link>
                   </Button>
-                  <DropdownMenu user={user} />
+                  <DropdownMenu  />
                 </div>
               ) : (
                 <LoginRegisterBtns />
